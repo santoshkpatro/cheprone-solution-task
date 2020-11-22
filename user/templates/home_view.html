@@ -13,8 +13,8 @@
                             <p class="card-text"><strong>Email: </strong>{{user.email}}</p>
                         </div>
                         <div class="card-body">
-                            <a href="#" class="card-link">Card link</a>
-                            <a href="#" class="card-link">Another link</a>
+                            <a href="{% url 'edit_view' user_id=user.id %}" class="btn btn-warning">Edit</a>
+                            <a href="{% url 'delete_view' user_id=user.id %}" class="btn btn-danger float-right">Delete</a>
                         </div>
                     </div>
                 </div>
