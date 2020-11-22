@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block content %}
+    <h2>User Profile List</h2>
+    {% if users %}
+        <div class="row">
+            {% for user in users %}
+                <div class="col-4">
+                    <div class="card w-100">
+                        <img src="{{user.image.url}}" class="card-img-top" alt="NA" height="200">
+                        <div class="card-body">
+                            <h5 class="card-title"><strong>Name: </strong>{{user.name}}</h5>
+                            <p class="card-text"><strong>Username: </strong>{{user.username}}</p>
+                            <p class="card-text"><strong>Email: </strong>{{user.email}}</p>
+                        </div>
+                        <div class="card-body">
+                            <a href="#" class="card-link">Card link</a>
+                            <a href="#" class="card-link">Another link</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <h3><strong>No users!!!!</strong></h3>
+    {% endif %}
+{% endblock %}
