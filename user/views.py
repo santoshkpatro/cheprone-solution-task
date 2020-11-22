@@ -13,16 +13,23 @@ def home_view(request):
 
 def add_view(request):
     if request.method == 'POST':
-        # print(request.POST)
+        # Extracting details from POST dict
         name = request.POST.get('name')
         username = request.POST.get('username')
         email = request.POST.get('email')
         password = request.POST.get('password')
         comments = request.POST.get('comments')
         image = request.FILES['image']
-        # print("Details: " + name + username + email + password + comments)
-        user = User(name=name, username=username, email=email, password=password, comments=comments, image=image)
-        user.save()
+
+        # Checking validation
+        if username != "" or email != "" or password != "":
+            # Creating user object
+            user = User(name=name, username=username, email=email, password=password, comments=comments, image=image)
+            # Saving to database
+            user.save()
+        else:
+            # Printing error message
+            print("Validation Error")
         return redirect('home_view')
     return render(request, 'add_view.html')
 
@@ -44,3 +51,8 @@ def edit_view(request, user_id):
         user.save()
         return redirect('home_view')
     return render(request, 'edit_view.html', context)
+
+def detail_view(request, user_id):
+    user = User.objects.get(id=user_id)
+    context = {'user': user}
+    return render(request, 'detail_view.html', context)

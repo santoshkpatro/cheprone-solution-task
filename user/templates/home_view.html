@@ -1,25 +1,39 @@
 {% extends "base.html" %}
 {% block content %}
-    <h2>User Profile List</h2>
+    <a href="{% url 'add_view' %}" class="btn btn-primary btn-block my-2">CLICK TO ADD USERS</a>
     {% if users %}
-        <div class="row">
+      <table class="table">
+          <thead class="thead-dark">
+            <tr>
+              <th scope="col">Sl No</th>
+              <th scope="col">Name</th>
+              <th scope="col">Username</th>
+              <th scope="col">Email</th>
+              <th scope="col">View</th>
+              <th scope="col">Edit</th>
+              <th scope="col">Delete</th>
+            </tr>
+          </thead>
+          <tbody>
             {% for user in users %}
-                <div class="col-4">
-                    <div class="card w-100">
-                        <img src="{{user.image.url}}" class="card-img-top" alt="NA" height="200">
-                        <div class="card-body">
-                            <h5 class="card-title"><strong>Name: </strong>{{user.name}}</h5>
-                            <p class="card-text"><strong>Username: </strong>{{user.username}}</p>
-                            <p class="card-text"><strong>Email: </strong>{{user.email}}</p>
-                        </div>
-                        <div class="card-body">
-                            <a href="{% url 'edit_view' user_id=user.id %}" class="btn btn-warning">Edit</a>
-                            <a href="{% url 'delete_view' user_id=user.id %}" class="btn btn-danger float-right">Delete</a>
-                        </div>
-                    </div>
-                </div>
+            <tr>
+              <th scope="row">{{forloop.counter}}</th>
+              <td>{{user.name}}</td>
+              <td>{{user.username}}</td>
+              <td>{{user.email}}</td>
+              <td>
+                <a href="{% url 'detail_view' user_id=user.id %}" class="btn btn-sm btn-outline-primary btn-block">View</a>
+              </td>
+              <td>
+                <a href="{% url 'edit_view' user_id=user.id %}" class="btn btn-sm btn-outline-warning btn-block">Edit</a>
+              </td>
+              <td>
+                <a href="{% url 'delete_view' user_id=user.id %}" class="btn btn-sm btn-outline-danger btn-block">Delete</a>
+              </td>
+            </tr>
             {% endfor %}
-        </div>
+          </tbody>
+      </table>
     {% else %}
         <h3><strong>No users!!!!</strong></h3>
     {% endif %}

@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block content %}
+    <h2 class="mb-3 text-center">User Details</h2>
+    <div class="row">
+        <div class="col-8 px-3">
+            <div class="card">
+                <div class="card-body">
+                    <label for="name"><strong>Name</strong></label>
+                    <p>{{user.name}}</p>
+                    <label for="username"><strong>Username</strong></label>
+                    <p>{{user.username}}</p>
+                    <label for="email"><strong>Email</strong></label>
+                    <p>{{user.email}}</p>
+                    <label for="comments"><strong>Comments</strong></label>
+                    <p>{{user.comments}}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-4">
+            <img src="{{user.image.url}}" alt="..." class="img-fluid" height="150" width="150" style="border-radius: 50%;">
+            <a href="{% url 'edit_view' user_id=user.id %}" class="btn btn-outline-warning btn-block my-2 mx-2">Edit</a>
+            <a href="{% url 'delete_view' user_id=user.id %}" class="btn btn-outline-danger btn-block my-2 mx-2">Delete</a>
+        </div>
+    </div>  
+{% endblock %}
