@@ -6,6 +6,7 @@ class User(models.Model):
     username = models.CharField(max_length=20, unique=True)
     email = models.EmailField(max_length=30)
     password = models.CharField(max_length=100)
+    number = models.CharField(max_length=12, blank=True, null=True)
     image = models.ImageField(upload_to='images/%Y/%m/%d', blank=True, null=True)
     comments = models.TextField(max_length=200, blank=True, null=True)
 

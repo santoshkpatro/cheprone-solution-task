@@ -18,7 +18,11 @@
             {% for user in users %}
             <tr>
               <th scope="row">{{forloop.counter}}</th>
+              {% if user.name %}
               <td>{{user.name}}</td>
+              {% else %}
+              <td>NA</td>
+              {% endif %}
               <td>{{user.username}}</td>
               <td>{{user.email}}</td>
               <td>

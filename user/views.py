@@ -19,13 +19,16 @@ def add_view(request):
         email = request.POST.get('email')
         password = request.POST.get('password')
         comments = request.POST.get('comments')
-        image = request.FILES['image']
-
+        number = request.POST.get('number')
+        try:
+            image = request.FILES['image']
+        except:
+            image = None
+        
         # Checking validation
         if username != "" or email != "" or password != "":
             # Creating user object
-            user = User(name=name, username=username, email=email, password=password, comments=comments, image=image)
-            # Saving to database
+            user = User(username=username, email=email, password=password, name=name, comments=comments, number=number, image=image)
             user.save()
         else:
             # Printing error message

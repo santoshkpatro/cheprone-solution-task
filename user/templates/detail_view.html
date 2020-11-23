@@ -13,11 +13,17 @@
                     <p>{{user.email}}</p>
                     <label for="comments"><strong>Comments</strong></label>
                     <p>{{user.comments}}</p>
+                    <label for="comments"><strong>Phone Number</strong></label>
+                    <p>{{user.number}}</p>
                 </div>
             </div>
         </div>
         <div class="col-4">
-            <img src="{{user.image.url}}" alt="..." class="img-fluid" height="150" width="150" style="border-radius: 50%;">
+            {% if user.image %}
+                <img src="{{user.image.url}}" alt="NA" class="img-fluid" height="150" width="150" style="border-radius: 50%;">
+            {% else %}
+                <h3><strong>No image available</strong></h3>
+            {% endif %}
             <a href="{% url 'edit_view' user_id=user.id %}" class="btn btn-outline-warning btn-block my-2 mx-2">Edit</a>
             <a href="{% url 'delete_view' user_id=user.id %}" class="btn btn-outline-danger btn-block my-2 mx-2">Delete</a>
         </div>
