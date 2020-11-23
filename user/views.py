@@ -26,7 +26,7 @@ def add_view(request):
             image = None
         
         # Checking validation
-        if username != "" or email != "" or password != "":
+        if len(username) > 3 and len(email) > 3 and len(password) > 3:
             # Creating user object
             user = User(username=username, email=email, password=password, name=name, comments=comments, number=number, image=image)
             user.save()
@@ -47,12 +47,21 @@ def edit_view(request, user_id):
     user = User.objects.get(id=user_id)
     context = {'user': user}
     if request.method == 'POST':
-        user.name = request.POST.get('name')
-        user.username = request.POST.get('username')
-        user.email = request.POST.get('email')
-        user.comments = request.POST.get('comments')
-        user.save()
-        return redirect('home_view')
+        name = request.POST.get('name')
+        username = request.POST.get('username')
+        email = request.POST.get('email')
+        number = request.POST.get('number')
+        comments = request.POST.get('comments')
+        if len(username) > 3 and len(email) > 3:
+            user.name = name
+            user.username = username
+            user.email = email
+            user.comments = comments
+            user.number = number
+
+            # Saving to database
+            user.save()
+            return redirect('home_view')
     return render(request, 'edit_view.html', context)
 
 def detail_view(request, user_id):
